@@ -1,5 +1,60 @@
 const INCOMPLETE_BOOK = "belumSelesai";
 const COMPLETE_BOOK = "sudahSelesai";
+const BOOKS_KEY = "BOOKSHELF_APPS";
+
+let books = [];
+
+function checkBrowser() {
+    if (typeof Storage === "undefined") {
+        alert("Browsermu tidak mendukung web storage!");
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function updateJson() {
+    if (checkBrowser()) {
+        localStorage.setItem(BOOKS_KEY, JSON.stringify(books));
+    }
+}
+
+function fetchJson() {
+    let data = JSON.parse(localStorage.getItem(BOOKS_KEY));
+
+    if (data !== null) {
+        books = data;
+    }
+
+    document.dispatchEvent(new Event("onjsonfetched"));
+}
+
+function composeBookObject(id, title, author, year, isComplete) {
+    return {
+        id, title, author, year, isComplete,
+    };
+}
+
+function renderFromBooks() {
+    for (book of books) {
+        const newBook = createBook(book.id, book.title, book.author, book.year, book.isComplete);
+
+        if (book.isComplete) {
+            document.getElementById(COMPLETE_BOOK).append(newBook);
+        } else {
+            document.getElementById(INCOMPLETE_BOOK).append(newBook);
+        }
+    }
+}
+
+function deleteBookFromJson(idBook) {
+    for (let arrayPosition = 0; arrayPosition < books.length; arrayPosition++) {
+        if (books[arrayPosition].id == idBook) {
+            books.splice(arrayPosition, 1);
+            break;
+        }
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -32,8 +87,6 @@ document.addEventListener("onjsonfetched", function () {
     renderFromBooks();
 });
 
-// BAWAH INI DOM.JS
-
 function addBook() {
     const idBuku = +new Date();
     const judul = document.getElementById("judul").value;
@@ -56,7 +109,7 @@ function addBook() {
 }
 
 function createBook(idBuku, judul, penulis, tahun, selesaiDibaca) {
-    const book = document.createElement("div");
+    const book = document.createElement("article");
     book.setAttribute("id", idBuku)
 
     const bookTitle = document.createElement("div");
@@ -77,110 +130,109 @@ function createBook(idBuku, judul, penulis, tahun, selesaiDibaca) {
     const cardContent = document.createElement("div");
     cardContent.classList.add("card-content");
 
-    // const cardAction = addAction(selesaiDibaca, idBuku);
+    const cardAction = addAction(selesaiDibaca, idBuku);
 
     cardContent.append(bookTitle, bookAuthor, bookYear);
     cardContainer.append(cardContent);
-    // cardContainer.append(cardAction);
+    cardContainer.append(cardAction);
     book.append(cardContainer);
 
     return book;
 }
 
-// function addAction(selesaiDibaca, idBuku) {
-//     const cardActions = document.createElement("div");
+function addAction(selesaiDibaca, idBuku) {
+    const cardButton = document.createElement("div");
+    const actionRead = createActionRead(idBuku);
+    const actionUndo = createActionUndo(idBuku);
+    const actionDelete = createActionDelete(idBuku);
 
-//     const actionDelete = createActionDelete(idBuku);
-//     const actionRead = createActionRead(idBuku);
-//     const actionUndo = createActionUndo(idBuku);
+    if (selesaiDibaca) {
+        cardButton.append(actionUndo);
+    } else {
+        cardButton.append(actionRead);
+    }
 
-//     cardActions.append(actionDelete);
+    cardButton.append(actionDelete);
 
-//     if (selesaiDibaca) {
-//         cardActions.append(actionUndo);
-//     } else {
-//         cardActions.append(actionRead);
-//     }
+    return cardButton;
+}
 
-//     return cardActions;
-// }
+function createActionDelete(idBuku) {
+    const actionDelete = document.createElement("button");
+    actionDelete.classList.add("button-delete");
+    actionDelete.innerHTML = 'Hapus';
 
-// function createActionDelete(idBuku) {
-//     const actionDelete = document.createElement("button");
-//     actionDelete.classList.add("btn", "btn-sm", "btn-outline-danger", "mx-1");
-//     actionDelete.innerHTML = '<i class="bi bi-x"></i>';
+    actionDelete.addEventListener("click", function () {
+        let confirmation = confirm("Apakah anda yakin ingin menghapus buku dari daftar?");
 
-//     actionDelete.addEventListener("click", function () {
-//         let confirmation = confirm("apakah anda yakin ingin menghapus buku?");
+        if (confirmation) {
+            const cardParent = document.getElementById(idBuku);
+            cardParent.addEventListener("eventDelete", function (event) {
+                event.target.remove();
+            });
+            cardParent.dispatchEvent(new Event("eventDelete"));
 
-//         if (confirmation) {
-//             const cardParent = document.getElementById(idBuku);
-//             cardParent.addEventListener("eventDelete", function (event) {
-//                 event.target.remove();
-//             });
-//             cardParent.dispatchEvent(new Event("eventDelete"));
+            deleteBookFromJson(idBuku);
+            updateJson();
+        }
+    });
 
-//             deleteBookFromJson(idBuku);
-//             updateJson();
-//         }
-//     });
+    return actionDelete;
+}
 
-//     return actionDelete;
-// }
+function createActionRead(idBuku) {
+    const action = document.createElement("button");
+    action.classList.add("button-card");
+    action.innerHTML = 'Selesai';
 
-// function createActionRead(idBuku) {
-//     const action = document.createElement("button");
-//     action.classList.add("btn", "btn-sm", "btn-outline-primary");
-//     action.innerHTML = '<i class="bi bi-check"></i>';
+    action.addEventListener("click", function () {
+        const cardParent = document.getElementById(idBuku);
 
-//     action.addEventListener("click", function () {
-//         const cardParent = document.getElementById(idBuku);
+        const bookTitle = cardParent.querySelectorAll(".card-content > div")[0].innerText;
+        const bookAuthor = cardParent.querySelectorAll(".card-content > div")[1].innerText;
+        const bookYear = cardParent.querySelectorAll(".card-content > div")[2].innerText;
 
-//         const bookTitle = cardParent.querySelector(".card-content > h5").innerText;
-//         const bookAuthor = cardParent.querySelectorAll(".card-content > span")[0].innerText;
-//         const bookYear = cardParent.querySelectorAll(".card-content > span")[1].innerText;
+        cardParent.remove();
 
-//         cardParent.remove();
+        const book = createBook(idBuku, bookTitle, bookAuthor, bookYear, true);
+        document.getElementById(COMPLETE_BOOK).append(book);
 
-//         const book = createBook(idBuku, bookTitle, bookAuthor, bookYear, true);
-//         document.getElementById(COMPLETE_BOOK).append(book);
+        deleteBookFromJson(idBuku);
+        const bookObject = composeBookObject(idBuku, bookTitle, bookAuthor, bookYear, true);
 
-//         deleteBookFromJson(idBuku);
-//         const bookObject = composeBookObject(idBuku, bookTitle, bookAuthor, bookYear, true);
+        books.push(bookObject);
+        updateJson();
+    })
 
-//         books.push(bookObject);
-//         updateJson();
-//     })
+    return action;
+}
 
-//     return action;
-// }
+function createActionUndo(idBuku) {
+    const action = document.createElement("button");
+    action.classList.add("button-card");
+    action.innerHTML = 'Belum Selesai';
 
-// function createActionUndo(idBuku) {
-//     const action = document.createElement("button");
-//     action.classList.add("btn", "btn-sm", "btn-outline-secondary");
-//     action.innerHTML = '<i class="bi bi-arrow-counterclockwise"></i>';
+    action.addEventListener("click", function () {
+        const cardParent = document.getElementById(idBuku);
 
-//     action.addEventListener("click", function () {
-//         const cardParent = document.getElementById(idBuku);
+        const bookTitle = cardParent.querySelectorAll(".card-content > div")[0].innerText;
+        const bookAuthor = cardParent.querySelectorAll(".card-content > div")[1].innerText;
+        const bookYear = cardParent.querySelectorAll(".card-content > div")[2].innerText;
 
-//         const bookTitle = cardParent.querySelector(".card-content > h5").innerText;
-//         const bookAuthor = cardParent.querySelectorAll(".card-content > span")[0].innerText;
-//         const bookYear = cardParent.querySelectorAll(".card-content > span")[1].innerText;
+        cardParent.remove();
 
-//         cardParent.remove();
+        const book = createBook(idBuku, bookTitle, bookAuthor, bookYear, false);
+        document.getElementById(INCOMPLETE_BOOK).append(book);
 
-//         const book = createBook(idBuku, bookTitle, bookAuthor, bookYear, false);
-//         document.getElementById(INCOMPLETE_BOOK).append(book);
+        deleteBookFromJson(idBuku);
+        const bookObject = composeBookObject(idBuku, bookTitle, bookAuthor, bookYear, false);
 
-//         deleteBookFromJson(idBuku);
-//         const bookObject = composeBookObject(idBuku, bookTitle, bookAuthor, bookYear, false);
+        books.push(bookObject);
+        updateJson();
+    })
 
-//         books.push(bookObject);
-//         updateJson();
-//     })
-
-//     return action;
-// }
+    return action;
+}
 
 function bookSearch(keyword) {
     const filter = keyword.toUpperCase();
