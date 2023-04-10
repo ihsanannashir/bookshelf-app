@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookshelf App - Lacak Bacaanmu!</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="./styles/img/books-icon.png">
+</head>
+<body>
+    <div class="top-container">
+        <span class="title">Bookshelf App</span class="title">
+        <span class="subtitle">Lacak Bacaanmu!</span> 
+    </div>
+
+    <div class="main-container">
+        <h1>Tambah Buku</h1>
+        <form>
+            <div class="input">
+                <label>Judul</label>
+                <input type="text" name="Judul" id="judul" placeholder="Masukkan judul buku">
+            </div>
+            <div class="input">
+                <label>Penulis</label>
+                <input type="text" name="Penulis" id="penulis" placeholder="Masukkan penulis buku">
+            </div>
+            <div class="input">
+                <label>Tahun</label>
+                <input type="number" name="Tahun" id="email" placeholder="Masukkan tahun terbit"></input>
+            </div>
+            <div class="form-check">
+                <input id="selesai-dibaca" type="checkbox">
+                <label for="selesai-dibaca">Selesai dibaca</label>
+            </div>
+            <div class="button">
+                <button type="submit">Masukkan Buku</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="main-container">
+        <form id="search" class="search">
+            <label class="form-label" for="cari-judul">Cari Buku</label>
+            <div class="input-search">
+                <input id="cari-judul" type="text" placeholder="Masukkan kata kunci">
+                <button type="submit" class="button-search">
+                    <span class="bi bi-search">Cari</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 - Created by M. Ihsan An-Nashir, All Right Reserved</p>
+    </footer>
+</body>
+</html>

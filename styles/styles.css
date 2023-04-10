@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #191919;
+    background-color: #FFF4E0;
+    margin: 0 auto;
+    padding: 0;
+    width: 55%;
+}
+
+footer {
+    background-color: #FFEBB4;
+    border-radius: 10px;
+    padding: 5px 0;
+    margin: 20px 0;
+    text-align: center;
+    font-size: small;
+}
+
+.top-container {
+    background-color: #FFEBB4;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.title {
+    font-weight: 600;
+    font-size:xx-large;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-weight: 400;
+}
+
+.main-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin: 15px 0;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    margin: 25px 0;
+}
+
+.input label {
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+.form-check {
+    display: flex;
+}
+
+.form-check input {
+    margin: 0;
+}
+
+.form-check label {
+    padding-left: 5px;
+    font-size: small;
+    font-weight: 200;
+}
+
+.input input, textarea {
+    width: 98%;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    outline: none;
+    resize: none;
+}
+
+.input-search {
+    display: block;
+    margin: 10px 0;
+}
+
+.search label {
+    font-weight: 600;
+}
+
+.input-search input, textarea {
+    width: 78%;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    outline: none;
+    resize: none;
+    margin-right: 5px;
+}
+
+.input input:focus, .input-search input:focus, textarea:focus {
+    background-color: #FFEBB4;
+    border: 1px solid #CCCCCC;
+}
+
+.button button {
+    width: 200px;
+    background-color: #FFBFA9;
+    margin: 20px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    transition: 0.2s;
+}
+
+.button button:hover {
+    background-color: #FFACAC;
+}
+
+.button-search {
+    width: 20%;
+    background-color: #FFBFA9;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    transition: 0.2s;
+}
+
+.button-search:hover {
+    background-color: #FFACAC;
+}
+
+@media (max-width: 1000px){
+    body {
+        width: 85%;
+    }
+}
+
+@media (max-width: 600px){
+    .input-search input, textarea {
+        width: 75%;
+    }
+}
