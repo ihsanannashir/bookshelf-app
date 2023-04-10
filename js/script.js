@@ -6,11 +6,10 @@ let books = [];
 
 function checkBrowser() {
     if (typeof Storage === "undefined") {
-        alert("Browsermu tidak mendukung web storage!");
+        alert("Browsermu tidak mendukung local storage!");
         return false;
-    } else {
-        return true;
     }
+    return true;
 }
 
 function updateJson() {
@@ -25,7 +24,6 @@ function fetchJson() {
     if (data !== null) {
         books = data;
     }
-
     document.dispatchEvent(new Event("onjsonfetched"));
 }
 
@@ -151,7 +149,6 @@ function addAction(selesaiDibaca, idBuku) {
     } else {
         cardButton.append(actionRead);
     }
-
     cardButton.append(actionDelete);
 
     return cardButton;
@@ -187,7 +184,6 @@ function createActionRead(idBuku) {
 
     action.addEventListener("click", function () {
         const cardParent = document.getElementById(idBuku);
-
         const bookTitle = cardParent.querySelectorAll(".card-content > div")[0].innerText;
         const bookAuthor = cardParent.querySelectorAll(".card-content > div")[1].innerText;
         const bookYear = cardParent.querySelectorAll(".card-content > div")[2].innerText;
