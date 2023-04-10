@@ -22,6 +22,10 @@ footer {
     font-size: small;
 }
 
+h1 {
+    font-size: x-large;
+}
+
 .top-container {
     background-color: #FFEBB4;
     border-radius: 10px;
@@ -75,7 +79,7 @@ footer {
 }
 
 .input input, textarea {
-    width: 98%;
+    width: 100%;
     font-family: 'Montserrat', sans-serif;
     border: 1px solid #CCCCCC;
     padding: 10px;
@@ -86,8 +90,11 @@ footer {
     resize: none;
 }
 
+.search {
+    padding-bottom: 15px;
+}
+
 .input-search {
-    display: block;
     margin: 10px 0;
 }
 
@@ -105,7 +112,7 @@ footer {
     transition: 0.5s;
     outline: none;
     resize: none;
-    margin-right: 5px;
+    margin-right: 1%;
 }
 
 .input input:focus, .input-search input:focus, textarea:focus {
@@ -148,6 +155,44 @@ footer {
     background-color: #FFACAC;
 }
 
+.katalog {
+    margin: 20px 0px;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.card-1 {
+    padding: 20px 15px;
+    margin: 15px 0;
+    background-color: #FFEBB4;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.card-1:hover {
+    background-color: #FBFFB1;
+}
+
+.cardTitle {
+    font-weight: 600;
+    font-size: larger;
+    padding-bottom: 2px;
+}
+
+.cardAuthor {
+    font-weight: 400;
+    font-size: medium;
+    padding-bottom: 10px;
+    font-style: italic;
+}
+
+.cardYear {
+    font-weight: bold;
+}
+
+.card-content {
+    /* background-color: red; */
+}
+
 @media (max-width: 1000px){
     body {
         width: 85%;
@@ -155,6 +200,10 @@ footer {
 }
 
 @media (max-width: 600px){
+    footer {
+        font-size: x-small;
+    }
+
     .input-search input, textarea {
         width: 75%;
     }

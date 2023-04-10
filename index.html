@@ -16,7 +16,7 @@
 
     <div class="main-container">
         <h1>Tambah Buku</h1>
-        <form>
+        <form id="tambahBuku">
             <div class="input">
                 <label>Judul</label>
                 <input type="text" name="Judul" id="judul" placeholder="Masukkan judul buku">
@@ -27,7 +27,7 @@
             </div>
             <div class="input">
                 <label>Tahun</label>
-                <input type="number" name="Tahun" id="email" placeholder="Masukkan tahun terbit"></input>
+                <input type="number" name="Tahun" id="tahun" placeholder="Masukkan tahun terbit"></input>
             </div>
             <div class="form-check">
                 <input id="selesai-dibaca" type="checkbox">
@@ -40,7 +40,7 @@
     </div>
 
     <div class="main-container">
-        <form id="search" class="search">
+        <form id="cariJudul" class="search">
             <label class="form-label" for="cari-judul">Cari Buku</label>
             <div class="input-search">
                 <input id="cari-judul" type="text" placeholder="Masukkan kata kunci">
@@ -49,10 +49,26 @@
                 </button>
             </div>
         </form>
+
+        <div class="bookshelf">
+            <div class="katalog">
+                <h1>Belum Selesai Dibaca</h1>
+                <div id="belumSelesai"></div>
+                </div>
+            </div>
+
+            <div class="katalog">
+                <h1>Selesai Dibaca</h1>
+                <div id="sudahSelesai"></div>
+            </div>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2023 - Created by M. Ihsan An-Nashir, All Right Reserved</p>
     </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/storage.js"></script>
 </body>
 </html>
