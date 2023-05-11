@@ -157,10 +157,10 @@ function addAction(selesaiDibaca, idBuku) {
 function createActionDelete(idBuku) {
     const actionDelete = document.createElement("button");
     actionDelete.classList.add("button-delete");
-    actionDelete.innerHTML = 'Hapus';
+    actionDelete.innerHTML = 'Delete';
 
     actionDelete.addEventListener("click", function () {
-        let confirmation = confirm("Apakah anda yakin ingin menghapus buku dari daftar?");
+        let confirmation = confirm("Are you sure you want to delete the book from the list?");
 
         if (confirmation) {
             const cardParent = document.getElementById(idBuku);
@@ -180,7 +180,7 @@ function createActionDelete(idBuku) {
 function createActionRead(idBuku) {
     const action = document.createElement("button");
     action.classList.add("button-card");
-    action.innerHTML = 'Selesai';
+    action.innerHTML = 'Finished';
 
     action.addEventListener("click", function () {
         const cardParent = document.getElementById(idBuku);
@@ -206,7 +206,7 @@ function createActionRead(idBuku) {
 function createActionUndo(idBuku) {
     const action = document.createElement("button");
     action.classList.add("button-card");
-    action.innerHTML = 'Belum Selesai';
+    action.innerHTML = 'Unfinished';
 
     action.addEventListener("click", function () {
         const cardParent = document.getElementById(idBuku);
@@ -244,3 +244,45 @@ function bookSearch(keyword) {
         }
     }
 }
+
+function AddInputOne() {
+    document.getElementById("judul").value = "Dear Tomorrow";
+    document.getElementById("penulis").value = "Maudy Ayunda";
+    document.getElementById("tahun").value = 2018;
+    document.getElementById('top').scrollIntoView();
+ }
+
+ function AddInputTwo() {
+    document.getElementById("judul").value = "The Subtle Art of Not Giving a F*ck";
+    document.getElementById("penulis").value = "Mark Manson";
+    document.getElementById("tahun").value = 2016;
+    document.getElementById('top').scrollIntoView();
+ }
+
+ function AddInputThree() {
+    document.getElementById("judul").value = "The Theory of Everything";
+    document.getElementById("penulis").value = "Stephen Hawking";
+    document.getElementById("tahun").value = 2002;
+    document.getElementById('top').scrollIntoView();
+ }
+
+ function AddInputFour() {
+    document.getElementById("judul").value = "All the Light We Cannot See";
+    document.getElementById("penulis").value = "Anthony Doer";
+    document.getElementById("tahun").value = 2014;
+    document.getElementById('top').scrollIntoView();
+ }
+
+ function AddInputFive() {
+    document.getElementById("judul").value = "You Do You: Discovering Live Through Experiments and Self-Awareness";
+    document.getElementById("penulis").value = "Fellexandro Ruby";
+    document.getElementById("tahun").value = 2020;
+    document.getElementById('top').scrollIntoView();
+ }
+
+ function AddInputSix() {
+    document.getElementById("judul").value = "The Hobbit";
+    document.getElementById("penulis").value = "J. R. R. Tolkien";
+    document.getElementById("tahun").value = 1937;
+    document.getElementById('top').scrollIntoView();
+ }

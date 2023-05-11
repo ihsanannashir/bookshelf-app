@@ -1,66 +1,83 @@
 <!DOCTYPE html>
-<!-- Dicoding Submission - M. Ihsan An-Nashir - Bookshelf App -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookshelf App - Lacak Bacaanmu!</title>
+    <title>Bookshelf App - Track your reading!</title>
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="icon" type="image/x-icon" href="./styles/img/books-icon.png">
 </head>
 <body>
     <div class="top-container">
         <span class="title">Bookshelf App</span class="title">
-        <span class="subtitle">Lacak Bacaanmu!</span> 
+        <span class="subtitle">Track your reading!</span> 
     </div>
 
-    <div class="main-container">
-        <h1>Tambah Buku</h1>
+    <div class="main-container" id="top">
+        <h1>Add Book</h1>
         <form id="tambahBuku">
             <div class="input">
-                <label>Judul</label>
-                <input type="text" name="Judul" id="judul" placeholder="Masukkan judul buku">
+                <label>Title</label>
+                <input type="text" name="Judul" id="judul" placeholder="Input the book title">
             </div>
             <div class="input">
-                <label>Penulis</label>
-                <input type="text" name="Penulis" id="penulis" placeholder="Masukkan penulis buku">
+                <label>Author</label>
+                <input type="text" name="Penulis" id="penulis" placeholder="Input the book author">
             </div>
             <div class="input">
-                <label>Tahun</label>
-                <input type="number" name="Tahun" id="tahun" placeholder="Masukkan tahun terbit"></input>
+                <label>Year</label>
+                <input type="number" name="Tahun" id="tahun" placeholder="Input the release year"></input>
             </div>
             <div class="form-check">
                 <input id="selesai-dibaca" type="checkbox">
-                <label for="selesai-dibaca">Selesai dibaca</label>
+                <label for="selesai-dibaca">Finished</label>
             </div>
             <div class="button">
-                <button type="submit">Masukkan Buku</button>
+                <button type="submit">Submit Book</button>
             </div>
         </form>
     </div>
 
     <div class="main-container">
         <form id="cariJudul" class="search">
-            <label class="form-label" for="cari-judul">Cari Buku</label>
+            <label class="form-label" for="cari-judul">Find your books</label>
             <div class="input-search">
-                <input id="cari-judul" type="text" placeholder="Masukkan kata kunci">
+                <input id="cari-judul" type="text" placeholder="Input keywords">
                 <button type="submit" class="button-search">
-                    <span class="bi bi-search">Cari</span>
+                    <span class="bi bi-search">Search</span>
                 </button>
             </div>
         </form>
 
         <div class="bookshelf">
             <div class="katalog">
-                <h1>Belum Selesai Dibaca</h1>
+                <h1>Unfinished Reading</h1>
                 <div id="belumSelesai"></div>
                 </div>
             </div>
 
             <div class="katalog">
-                <h1>Selesai Dibaca</h1>
+                <h1>Finished Reading</h1>
                 <div id="sudahSelesai"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <h1>Books for you</h1>
+        <div class="container-book">
+            <div onclick="AddInputOne()" class="card" id="book-1" style="background-image: url('./styles/img/dear-tomorrow.jpeg')">
+            </div>
+            <div onclick="AddInputTwo()" class="card" id="book-2" style="background-image: url('./styles/img/art-subtle.jpeg')">
+            </div>
+            <div onclick="AddInputThree()" class="card" id="book-3" style="background-image: url('./styles/img/the-theory-of-everything.jpg')">
+            </div>
+            <div onclick="AddInputFour()" class="card" id="book-4" style="background-image: url('./styles/img/all-the-light.jpg')">
+            </div>
+            <div onclick="AddInputFive()" class="card" id="book-5" style="background-image: url('./styles/img/you-do-you.jpeg')">
+            </div>
+            <div onclick="AddInputSix()" class="card" id="book-6" style="background-image: url('./styles/img/hobbit.jpeg')">
             </div>
         </div>
     </div>
